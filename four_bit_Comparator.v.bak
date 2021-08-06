@@ -1,0 +1,62 @@
+module four_bit_Comparator(X,Y,XltY,XeqY,XgtY);
+
+    
+    input [3:0] X;
+    input [3:0] Y;
+    
+    output  XltY;
+     output XeqY;
+     output  XgtY; 
+     
+     reg XltY;
+     reg XeqY;
+     reg XgtY;
+
+    
+    always @(X or Y)
+     begin
+        if(X > Y)   begin  
+            XltY = 0;
+            XeqY = 0;
+            XgtY = 1;    end
+        else if(X == Y) begin 
+            XltY = 0;
+            XeqY = 1;
+            XgtY = 0;    end
+        else    begin 
+            XltY = 1;
+            XeqY = 0;
+            XgtY =0;
+        end 
+    end
+endmodule
+
+
+module tbComparator;
+
+    
+    reg [3:0] X;
+    reg [3:0] Y;
+
+    
+    wire AltX;
+    wire AeqX;
+    wire AgtX;
+
+    
+    four-bit-comparator Comparator(.X(X),.Y(Y),.XltY(XltY),.XeqY(XeqY),.XgtY(XgtY));
+
+    initial begin
+        
+        X = 11;
+        Y = 15;
+        #100;
+        X = 14;
+        Y = 9;
+        #100;
+        X = 10;
+        Y = 10;
+        #100;
+    end
+      
+endmodule
